@@ -21,6 +21,10 @@ class Jenny {
         if (exp[0] === "+") {
             return this.eval(exp[1]) + this.eval(exp[2]);
         }
+        if (exp[0] === "*") {
+            return this.eval(exp[1]) * this.eval(exp[2]);
+        }
+
 
         /****  Variable declarations */
 
@@ -34,7 +38,22 @@ class Jenny {
             return this.global.lookup(exp);
         }
 
+
+        /** Implementing Block  */
+        if (exp[0] === "begin") {
+            return this.evalBlock(exp);
+        }
+
         throw new Error(`Unexpected syntax ${exp[0]}`);
+    }
+
+    evalBlock(exp) {
+        let result;
+        let [_, ...block] = exp;
+        block.forEach(expression => {
+            result = this.eval(expression);
+        });
+        return result;
     }
 }
 
@@ -66,7 +85,7 @@ var jenny = new Jenny(new Environment({
     VERSION: 0.1
 }));
 
-assert.strictEqual(jenny  .eval(1), 1);
+assert.strictEqual(jenny.eval(1), 1);
 assert.strictEqual(jenny.eval(12), 12);
 assert.strictEqual(jenny.eval(["+", ["+", ["+", 2, 2], 3], 2]), 9);
 
@@ -91,6 +110,15 @@ assert.strictEqual(jenny.eval(["var", "isUser", "true"]), true);
 
 assert.strictEqual(jenny.eval(["var", "z", ["+", 25, 25]]), 50);
 
+
+// Testing scopes and blocks.
+
+assert.strictEqual(jenny.eval([
+    "begin",
+    ["var", "x", 10],
+    ["var", "y", 10],
+    ["*", "x", "y"]
+]), 100);
 console.log("All cases passed");
 
 
