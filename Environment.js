@@ -18,6 +18,10 @@ class Environment {
         return this.resolve(name).record[name];
     }
 
+    setValue(name, value) {
+        return this.resolve(name).record[name] = value;
+    }
+
     resolve(name) {
         if (this.record.hasOwnProperty(name)) {
             return this;
@@ -30,6 +34,7 @@ class Environment {
 
         return this.parent.resolve(name);
     }
+
 
 }
 

@@ -15,14 +15,14 @@ class Jenny {
         }
 
         if (exp[0] === "-") {
-            return this.eval(exp[1]) - this.eval(exp[2], env);
+            return this.eval(exp[1], env) - this.eval(exp[2], env);
         }
 
         if (exp[0] === "+") {
-            return this.eval(exp[1]) + this.eval(exp[2], env);
+            return this.eval(exp[1], env) + this.eval(exp[2], env);
         }
         if (exp[0] === "*") {
-            return this.eval(exp[1]) * this.eval(exp[2], env);
+            return this.eval(exp[1], env) * this.eval(exp[2], env);
         }
 
 
@@ -31,7 +31,7 @@ class Jenny {
 
         if (exp[0] === "var") {
             let [_, name, value] = exp;
-            return this.global.define(name, this.eval(value, env))
+            return env.define(name, this.eval(value, env))
         }
 
         if (isVariableName(exp)) {
@@ -43,6 +43,12 @@ class Jenny {
         if (exp[0] === "begin") {
             const blockEnv = new Environment({}, env);
             return this.evalBlock(exp, blockEnv);
+        }
+
+        //Implementing set keyword
+        if (exp[0] === "set") {
+            let [_, name, value] = exp;
+            return env.setValue(name, value)
         }
 
         throw new Error(`Unexpected syntax ${exp[0]}`);
@@ -133,7 +139,20 @@ assert.strictEqual(jenny.eval([
     ],
 ]), 20);
 
+// Testing setting value
+
+assert.strictEqual(jenny.eval(
+    ["begin",
+        ["var", "x", 10],
+        ["var", "y", 100],
+        ["set", "x", 200],
+        ["begin",
+            ["var", "z", 300],
+            ["set", "x", 600] // overriding parent scope property x
+        ],
+        "x"
+    ]
+), 600);
 
 console.log("All cases passed ✅");
-
 
