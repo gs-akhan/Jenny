@@ -50,6 +50,20 @@ class Jenny {
             let [_, name, value] = exp;
             return env.setValue(name, value)
         }
+        //Implementing equals operator
+        if(exp[0] === "==") {
+            return this.eval(exp[1], env) === this.eval(exp[2], env);
+        }
+
+        //Implementing if statement
+        if(exp[0] === "if") {
+            let [_, condition, consequent, alternative] = exp;
+            if(this.eval(condition, env)) {
+                return this.eval(consequent, env);
+            } else {
+                return this.eval(alternative, env);
+            }
+        }
 
         throw new Error(`Unexpected syntax ${exp[0]}`);
     }
@@ -153,6 +167,20 @@ assert.strictEqual(jenny.eval(
         "x"
     ]
 ), 600);
+
+
+assert.strictEqual(jenny.eval([
+    
+    "begin", 
+        ["var", "x", 100],
+        ["var", "z", 200],
+        ["if", ["==", "x", 100],
+            ["set", "x", 200],
+            ["set", "x", 300],
+        ],
+        "x"
+]), 200)
+
 
 console.log("All cases passed ✅");
 
