@@ -48,21 +48,45 @@ class Jenny {
         //Implementing set keyword
         if (exp[0] === "set") {
             let [_, name, value] = exp;
-            return env.setValue(name, value)
+            return env.setValue(name, this.eval(value, env))
         }
-        //Implementing equals operator
-        if(exp[0] === "==") {
+        //Implementing comparison operators operator
+        if (exp[0] === "==") {
             return this.eval(exp[1], env) === this.eval(exp[2], env);
         }
 
+        if (exp[0] === ">") {
+            return this.eval(exp[1], env) > this.eval(exp[2], env);
+        }
+
+        if (exp[0] === "<") {
+            return this.eval(exp[1], env) < this.eval(exp[2], env);
+        }
+
+        //Ending Comparision operators ============
+
+
         //Implementing if statement
-        if(exp[0] === "if") {
+        if (exp[0] === "if") {
             let [_, condition, consequent, alternative] = exp;
-            if(this.eval(condition, env)) {
+            if (this.eval(condition, env)) {
                 return this.eval(consequent, env);
             } else {
                 return this.eval(alternative, env);
             }
+        }
+
+
+        // Implementing while statement
+
+        if (exp[0] === "while") {
+            let [_, condition, expression] = exp;
+
+            let result;
+            while (this.eval(condition, env)) {
+                result = this.eval(expression, env);
+            }
+            return result;
         }
 
         throw new Error(`Unexpected syntax ${exp[0]}`);
@@ -170,16 +194,27 @@ assert.strictEqual(jenny.eval(
 
 
 assert.strictEqual(jenny.eval([
-    
-    "begin", 
-        ["var", "x", 100],
-        ["var", "z", 200],
-        ["if", ["==", "x", 100],
-            ["set", "x", 200],
-            ["set", "x", 300],
-        ],
-        "x"
-]), 200)
+
+    "begin",
+    ["var", "x", 100],
+    ["var", "z", 200],
+    ["if", ["==", "x", 100],
+        ["set", "x", 200],
+        ["set", "x", 300],
+    ],
+    "x"
+]), 200);
+
+
+assert.strictEqual(jenny.eval([
+    "begin",
+    ["var", "x", 1],
+    ["while",
+        ["<", "x", 100],
+        ["set", "x", ["+", "x", 1]]
+    ],
+    "x"
+]), 100)
 
 
 console.log("All cases passed ✅");
