@@ -1,0 +1,25 @@
+{
+  "name": "jenny",
+  "version": "1.0.0",
+  "description": "Simple programming language",
+  "main": "Jenny.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gs-akhan/Jenny.git"
+  },
+  "keywords": [
+    "parser",
+    "compiler",
+    "language",
+    "programming"
+  ],
+  "author": "Akhan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gs-akhan/Jenny/issues"
+  },
+  "homepage": "https://github.com/gs-akhan/Jenny#readme"
+}

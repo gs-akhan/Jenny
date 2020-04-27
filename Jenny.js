@@ -1,5 +1,7 @@
 var assert = require("assert");
 var Environment = require("./Environment");
+var jennyParser = require("./parser/jennyParser");
+
 class Jenny {
 
     constructor(global = new Environment()) {

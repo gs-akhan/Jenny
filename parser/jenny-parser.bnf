@@ -1,0 +1,31 @@
+// Lexical Grammar. 
+%lex
+
+%%
+\s+                 /* skip whitespace */
+\d+                 return 'NUMBER'
+\"[^\"].*\"          return 'STRING'
+[\w+\-+*=<>/]+      return 'SYMBOL'
+
+/lex
+
+%%
+EXP 
+     : ATOM
+     | LIST
+     ;
+
+ATOM 
+     : NUMBER  { $$ = Number($1) }
+     | STRING 
+     | SYMBOL
+     ;
+
+LIST 
+     : '(' LIST_ENTRIES ')' { $$ =  $2 }
+     ;
+
+LIST_ENTRIES
+     : LIST_ENTRIES EXP { $1.push($2); $$ = $1}
+     | /* empty */ { $$ = [] }
+     ;
