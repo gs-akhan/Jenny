@@ -5,7 +5,9 @@
 \s+                 /* skip whitespace */
 \d+                  return 'NUMBER'
 \"[^\"].*\"          return 'STRING'
+(true|false)         return 'BOOLEAN'
 [\w+\-+*=<>/]+       return 'SYMBOL'
+
 
 /lex
 
@@ -19,6 +21,7 @@ ATOM
      : NUMBER  { $$ = Number($1) }
      | STRING 
      | SYMBOL
+     | BOOLEAN {{ $$ = $1 ==='true' ? true : false}}
      ;
 
 LIST 
