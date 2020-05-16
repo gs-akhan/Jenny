@@ -138,12 +138,14 @@ assert.strictEqual(jenny.eval(["+", ["+", ["+", 2, 2], 3], 2]), 9);
 
 //Testing Minus operator
 
-assert.strictEqual(jenny.eval(["-", 5, 5]), 0);
+
+
+assert.strictEqual(jenny.eval(jennyParser.parse(`(- 5 5)`)), 0);
 
 assert.strictEqual(jenny.eval('"HelloWorld"'), 'HelloWorld');
 
 // Testing assignment 
-assert.strictEqual(jenny.eval(["var", "x", 10]), 10);
+assert.strictEqual(jenny.eval(jennyParser.parse(`(var x 10)`)), 10);
 
 // Testing lookup to variable name
 
@@ -151,33 +153,34 @@ assert.strictEqual(jenny.eval("x"), 10);
 
 //Testing assignment of booleans
 
-assert.strictEqual(jenny.eval(["var", "isUser", "true"]), true);
+assert.strictEqual(jenny.eval(jennyParser.parse(`(var isUser true)`)), true);
 
 // Testing nested evaluation
 
-assert.strictEqual(jenny.eval(["var", "z", ["+", 25, 25]]), 50);
+assert.strictEqual(jenny.eval(jennyParser.parse(`(var z (+ 25 25))`)), 50);
 
 
 // Testing scopes and blocks.
-assert.strictEqual(jenny.eval([
-    "begin",
-    ["var", "x", 10],
-    ["var", "y", 10],
-    ["*", "x", "y"]
-]), 100);
+assert.strictEqual(jenny.eval(jennyParser.parse(
+    `(begin 
+        (var x 10)
+        (var y 10)
+        (* x y) 
+    )`
+)), 100);
 
 
 // Testing nested blocks
 
-assert.strictEqual(jenny.eval([
-    "begin",
-    ["var", "x", 10],
-    ["var", "y", 10],
-    ["begin", [
-        "var", "z", ["+", "x", "y"]
-    ]
-    ],
-]), 20);
+assert.strictEqual(jenny.eval(jennyParser.parse(`
+    (begin 
+        (var x 10)
+        (var y 10)
+        (begin 
+            (var z (+ x y))
+        )
+    )
+`)), 20);
 
 // Testing setting value
 
@@ -217,6 +220,14 @@ assert.strictEqual(jenny.eval([
     ],
     "x"
 ]), 100)
+
+
+assert.strictEqual(jenny.eval(jennyParser.parse(`
+(begin 
+    (var age 20)
+    (set age 30)
+    age
+)`)), 30)
 
 
 console.log("All cases passed ✅");

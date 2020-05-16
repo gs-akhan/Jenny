@@ -3,9 +3,9 @@
 
 %%
 \s+                 /* skip whitespace */
-\d+                 return 'NUMBER'
+\d+                  return 'NUMBER'
 \"[^\"].*\"          return 'STRING'
-[\w+\-+*=<>/]+      return 'SYMBOL'
+[\w+\-+*=<>/]+       return 'SYMBOL'
 
 /lex
 
