@@ -87,15 +87,16 @@ assert.strictEqual(jenny.eval([
 ]), 200);
 
 
-assert.strictEqual(jenny.eval([
-    "begin",
-    ["var", "x", 1],
-    ["while",
-        ["<", "x", 100],
-        ["set", "x", ["+", "x", 1]]
-    ],
-    "x"
-]), 100)
+
+assert.strictEqual(jenny.eval(jennyParser.parse(`
+    (begin
+        (var x 1)
+        (while (< x 100)
+            (set x (+ x 1))
+        )
+    )
+`)), 100);
+
 
 assert.strictEqual(jenny.eval(jennyParser.parse(`
 (begin 
