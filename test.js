@@ -87,7 +87,9 @@ assert.strictEqual(jenny.eval([
 ]), 200);
 
 
-
+/**
+ * Testing While loop
+ */
 assert.strictEqual(jenny.eval(jennyParser.parse(`
     (begin
         (var x 1)
