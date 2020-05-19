@@ -33,6 +33,9 @@ var GlobalEnv = new Environment({
     },
     "="(op1, op2) {
         return op1 === op2;
+    },
+    print(...args) {
+        console.log(...args);
     }
 })
 

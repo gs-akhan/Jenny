@@ -8,7 +8,6 @@ class Jenny {
         this.global = global;
     }
     eval(exp, env = this.global) {
-
         if (isNumber(exp)) {
             return exp;
         }
@@ -18,7 +17,6 @@ class Jenny {
         }
 
         if (isBoolean(exp)) {
-            console.log("I am boolean", exp)
             return true;
         }
 
@@ -74,8 +72,22 @@ class Jenny {
             return result;
         }
 
-        if (Array.isArray(exp)) {
+        // Function definition here
 
+        if (exp[0] === "func") {
+            let [_, funcName, params, body] = exp;
+
+            const fn = {
+                params,
+                body,
+                env
+            }
+
+            return env.define(funcName, fn);
+        }
+
+
+        if (Array.isArray(exp)) {
             let fn = this.eval(exp[0], env);
 
             let args = exp.slice(1).map(arg => this.eval(arg, env));
@@ -84,12 +96,29 @@ class Jenny {
             if (typeof fn === "function") {
                 return fn(...args);
             }
+
+            let activationRecord = {}
+            fn.params.forEach((param, index) => {
+                activationRecord[param] = args[index];
+            });
+
+            let activationEnv = new Environment(activationRecord, fn.env);
+
+            return this.evalBody(fn.body, activationEnv);
         }
 
         //console.stack();
         throw new Error(`Unexpected syntax ${exp[0]}`);
     }
 
+
+    evalBody(body, env) {
+        if (body[0] === "begin") {
+            return this.evalBlock(body, env);
+        } else {
+            return this.eval(body, env);
+        }
+    }
     evalBlock(exp, blockEnv) {
         let result;
         let [_, ...block] = exp;
@@ -98,6 +127,9 @@ class Jenny {
         });
         return result;
     }
+
+
+
 }
 
 

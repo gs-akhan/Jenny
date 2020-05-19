@@ -118,5 +118,30 @@ assert.strictEqual(jenny.eval(jennyParser.parse(
 )), 1)
 
 
+jenny.eval(jennyParser.parse(`
+    (
+        print (+ 2 2)
+    )
+`));
+
+
+/**
+ * Testing User defined function
+ */
+
+assert.strictEqual(jenny.eval(jennyParser.parse(`
+    (begin
+    
+    (func sqaure(i)
+        (* i i))
+
+    (func add(i i)
+        (+ i i)
+    )
+    
+    (sqaure (add 1 1))
+    )
+`)), 4)
+//assert.strictEqual(jenny.eval(100), 100)
 
 console.log("ALL TESTS PASSED ✅")
