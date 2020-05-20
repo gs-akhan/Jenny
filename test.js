@@ -132,16 +132,22 @@ jenny.eval(jennyParser.parse(`
 assert.strictEqual(jenny.eval(jennyParser.parse(`
     (begin
     
+    (var glob 0)
+    
     (func sqaure(i)
-        (* i i))
+        (* i i)
+    )
 
     (func add(i i)
-        (+ i i)
+        (+ (+ glob i) i)
     )
     
     (sqaure (add 1 1))
+
     )
 `)), 4)
 //assert.strictEqual(jenny.eval(100), 100)
-
+/**
+ * IF this is printed then all tests passed
+ */
 console.log("ALL TESTS PASSED ✅")
