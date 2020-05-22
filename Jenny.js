@@ -108,7 +108,7 @@ class Jenny {
         }
 
         //console.stack();
-        // This means there is evaluation error/
+        //If this happens we have syntax error 
         throw new Error(`Unexpected syntax ${exp[0]}`);
     }
 
