@@ -73,7 +73,6 @@ class Jenny {
         }
 
         // Function definition here
-
         if (exp[0] === "func") {
             let [_, funcName, params, body] = exp;
 
@@ -86,7 +85,17 @@ class Jenny {
             return env.define(funcName, fn);
         }
 
+        if (exp[0] === "lambda") {
+            let [_, params, body] = exp
+            return {
+                params,
+                body,
+                env
+            }
+        }
 
+
+        console.log(exp);
         if (Array.isArray(exp)) {
             let fn = this.eval(exp[0], env);
 
