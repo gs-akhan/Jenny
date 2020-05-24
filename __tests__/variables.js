@@ -7,5 +7,4 @@ var jenny = new Jenny();
 
 assert.strictEqual(jenny.eval(JennyParser.parse(`(var age 10)`)), 10);
 
-
 console.log('Variables Test Passed ✅');
