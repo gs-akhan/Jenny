@@ -5,7 +5,7 @@
   "main": "Jenny.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate-parser" : "syntax-cli --grammar parser/jenny-parser.bnf --mode LALR1 --output parser/jennyParser.js"
+    "generate-parser": "syntax-cli --grammar parser/jenny-parser.bnf --mode LALR1 --output parser/jennyParser.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/gs-akhan/Jenny/issues"
   },
-  "homepage": "https://github.com/gs-akhan/Jenny#readme"
+  "homepage": "https://github.com/gs-akhan/Jenny#readme",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
 }
