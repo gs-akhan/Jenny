@@ -3,7 +3,7 @@ var JennyParser = require("../parser/jennyParser");
 var assert = require("assert");
 var jenny = new Jenny();
 
-
+// Testing Lambda function
 assert.strictEqual(jenny.eval(JennyParser.parse(`
     (begin 
         (func onClick (callback)
