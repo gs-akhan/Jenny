@@ -1,7 +1,7 @@
 
 var Environment = require("./Environment");
 var globalEnv = require("./GlobalEev");
-
+//Class to comment
 class Jenny {
 
     constructor(global = globalEnv) {
