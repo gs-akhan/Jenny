@@ -4,6 +4,7 @@ var assert = require("assert");
 
 var jenny = new Jenny();
 
+//Testing variables
 
 assert.strictEqual(jenny.eval(JennyParser.parse(`(var age 10)`)), 10);
 
