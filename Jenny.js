@@ -1,11 +1,13 @@
 
 var Environment = require("./Environment");
 var globalEnv = require("./GlobalEev");
+var Transformer = require("./parser/transformer");
 //Class to comment
 class Jenny {
 
     constructor(global = globalEnv) {
         this.global = global;
+        this.transformer = new Transformer();
     }
     eval(exp, env = this.global) {
         if (isNumber(exp)) {
@@ -59,6 +61,11 @@ class Jenny {
             }
         }
 
+        // Implementing Switch statement;
+
+        if(exp[0] === "switch") {
+            return this.eval(this.transformer.transformSwitchToIf(exp), env);
+        }
 
         // Implementing while statement
 
@@ -71,6 +78,8 @@ class Jenny {
             }
             return result;
         }
+
+        
 
         // Function definition here
 
