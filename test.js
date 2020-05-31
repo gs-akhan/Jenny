@@ -129,23 +129,7 @@ jenny.eval(jennyParser.parse(`
  * Testing User defined function
  */
 
-assert.strictEqual(jenny.eval(jennyParser.parse(`
-    (begin
-    
-    (var glob 0)
-    
-    (func sqaure(i)
-        (* i i)
-    )
-
-    (func add(i i)
-        (+ (+ glob i) i)
-    )
-    
-    (sqaure (add 1 1))
-
-    )
-`)), 4)
+//assert.strictEqual(, 4)
 //assert.strictEqual(jenny.eval(100), 100)
 /**
  * IF this is printed then all tests passed

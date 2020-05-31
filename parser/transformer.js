@@ -30,11 +30,9 @@ class Transformer {
                 currentIF = currentIF[3];
             }
 
-
         });
 
         return finalIF;
-
     }
 }
 

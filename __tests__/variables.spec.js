@@ -13,5 +13,22 @@ describe('Testing variable declaration', () => {
         expect(output).toBe(10);
 
     });
+
+
+    it('should declare variable and then able to set the value', () => {
+
+        let output = jenny.eval(JennyParser.parse(`
+            (begin 
+                (var age 10)
+                (set age 20)    
+            )
+        
+        `));
+        expect(output).toBe(20);
+
+    });
+
+    
+
 });
 

@@ -1,6 +1,5 @@
 var Jenny = require("../Jenny");
 var JennyParser = require("../parser/jennyParser");
-var assert = require("assert");
 var jenny = new Jenny();
 
 // Testing Lambda function
