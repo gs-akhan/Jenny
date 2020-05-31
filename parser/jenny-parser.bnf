@@ -2,13 +2,13 @@
 %lex
 
 %%
-\s+                 /* skip whitespace */
+\s+                  /* skip whitespace */
+\/\*.*?\*\/          /* skip comment */
 \d+                  return 'NUMBER'
 \"[^\"].*\"          return 'STRING'
 (true|false)         return 'BOOLEAN'
 [\w+\-+*=<>/]+       return 'SYMBOL'
-
-
+-
 /lex
 
 %%
@@ -18,7 +18,8 @@ EXP
      ;
 
 ATOM 
-     : NUMBER  { $$ = Number($1) }
+     : COMMENT
+     | NUMBER  { $$ = Number($1) }
      | STRING 
      | SYMBOL
      | BOOLEAN {{ $$ = $1 ==='true' ? true : false}}
