@@ -200,4 +200,4 @@ While statement
 ```
 
 
-Special thanks to [Srinivas Pulagam](#https://github.com/gs-spulagam) & [Dmitry Soshnikov](#https://github.com/DmitrySoshnikov) for all the mentoring and help.
+Special thanks to [Srinivas Pulagam](https://github.com/gs-spulagam) & [Dmitry Soshnikov](https://github.com/DmitrySoshnikov) for all the mentoring and help.
