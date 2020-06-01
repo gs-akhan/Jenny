@@ -6,9 +6,7 @@ var jenny = new Jenny();
 
 describe('Testing While statement', () => {
     it('should iterate over block for 5 times', () => {
-
         let code = `
-        
             (begin
                 (var result 0) 
                 (while (< result 10)

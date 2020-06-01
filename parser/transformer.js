@@ -34,6 +34,20 @@ class Transformer {
 
         return finalIF;
     }
+
+    transformForToWhile(exp) {
+
+        let [_, initialization, condition, incrementer, body] = exp;
+
+        body.push(incrementer);
+
+        let whileLoop = ["while", condition /*condition*/, body, /*body */];
+
+        let finalWhileLoop = ["begin", initialization, whileLoop];
+
+        return finalWhileLoop;
+    }
+
 }
 
 

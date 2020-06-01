@@ -18,7 +18,9 @@ A lot about jenny is inspired buy scheme. currently scheme executes on Javascrip
 * [Control Flow Statements](#control-flow-statements)
     >* [if statement](#if-statement)
     >* [switch statement](#switch-statement)
-* [Iteration Controls](#Iteration-Controls)
+* Iteration Controls
+    >* [while loop](#while-loop)
+    >* [For Loop](#for-loop)
 * [Recurssion](#recurssion)
 
 
@@ -164,6 +166,20 @@ While statement
     (var result 0) 
     (while (< result 10)
         (set result (+ result 1))
+    )
+)
+
+```
+
+### For Loop
+`(<for keyword> (<initialization block>) (<bail out condition>)  (<increment block>) (<block>))`
+```
+(begin
+    (var result 1)
+    (for (var x 1) (< x 10) (set x (+ x 1))
+        (begin 
+            (set result (+ result x))
+        )
     )
 )
 

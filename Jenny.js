@@ -67,8 +67,13 @@ class Jenny {
             return this.eval(this.transformer.transformSwitchToIf(exp), env);
         }
 
-        // Implementing while statement
 
+        //Implementing for loop 
+        if(exp[0] === "for") {
+            return this.eval(this.transformer.transformForToWhile(exp), env);
+        }
+
+        // Implementing while statement
         if (exp[0] === "while") {
             let [_, condition, expression] = exp;
 
@@ -87,6 +92,7 @@ class Jenny {
             let [_, funcName, params, body] = exp;
 
             const fn = {
+                funcName,
                 params,
                 body,
                 env
@@ -116,6 +122,9 @@ class Jenny {
             }
 
             let activationRecord = {}
+
+            //console.log(fn.funcName);
+        
             fn.params.forEach((param, index) => {
                 activationRecord[param] = args[index];
             });
