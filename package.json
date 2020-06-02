@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Simple programming language",
   "main": "Jenny.js",
+  "bin": {
+    "jenny": "./index.js"
+  },
   "scripts": {
     "test": "jest",
     "generate-parser": "syntax-cli --grammar parser/jenny-parser.bnf --mode LALR1 --output parser/jennyParser.js"
