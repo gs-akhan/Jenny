@@ -1,6 +1,13 @@
 # Jenny
 A very simple Scheme-like interpreted language. 👨🏻‍💻
 
+#  Installation
+
+```npm install jenny -g```
+
+# Demo
+![Alt Text](https://github.com/gs-akhan/Jenny/blob/master/assets/demo.gif?raw=true)
+
 
 # About
 A lot about jenny is inspired buy scheme. currently scheme executes on Javascript VM, i.e it uses Nodejs to run.
