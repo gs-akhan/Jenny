@@ -5,9 +5,6 @@ var Jenny = require("./Jenny");
 var jenny = new Jenny();
 var fs = require("fs");
 
-
-
-var Jenn
 var args = process.argv;
 let [_node, _cmd, file] = args;
 if (!file) {
@@ -17,7 +14,7 @@ if (!file) {
 }
 
 
-var fileToExec =  fs.readFileSync(process.cwd() + "/"+file);
+var fileToExec = fs.readFileSync(process.cwd() + "/" + file);
 
 let content = fileToExec.toString();
 
