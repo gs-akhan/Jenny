@@ -2,7 +2,7 @@
 var Environment = require("./Environment");
 var globalEnv = require("./GlobalEev");
 var Transformer = require("./parser/transformer");
-//Class to comment
+//Interpretor for jenny code. 
 class Jenny {
 
     constructor(global = globalEnv) {
