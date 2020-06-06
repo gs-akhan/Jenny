@@ -3,6 +3,7 @@ var JennyParser = require("../parser/jennyParser");
 var jenny = new Jenny();
 
 // Testing set keyword
+// This tests the usage of set command
 describe('Testing set expression', () => {
     it('should set or reassign the value to identifier', () => {
         
